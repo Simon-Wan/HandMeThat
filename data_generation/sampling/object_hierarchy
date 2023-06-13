@@ -1,0 +1,234 @@
+5 classes, 155 types
+classes     LOCATION RECEPTACLE FOOD TOOL THING
+
+________________________________
+LOCATION (16 types)
+
+floor				ontop
+countertop			ontop
+sofa				ontop
+bed					ontop
+stove				ontop
+table				ontop
+shelf				ontop
+toilet 				ontop
+
+cabinet				inside
+bathtub				inside
+microwave			inside
+oven 				inside
+dishwasher			inside
+refrigerator		inside
+sink				inside
+pool 				inside
+
+________________________________
+RECEPTACLE (13 sublcasses, 27 types)
+
+highchair			furniture
+chair				furniture
+seat				furniture
+
+bottle				vessel
+jar					vessel
+kettle				vessel
+caldron				vessel
+
+bowl				tableware
+mug					tableware
+plate				tableware
+dish 				tableware
+cup 				tableware
+
+saucepan			utensil
+pan					utensil
+casserole			utensil
+
+duffel_bag			bag
+sack				bag
+backpack			bag
+briefcase			bag
+
+bucket              bucket
+
+tray 				tray
+
+basket				basket
+
+box					box
+
+package				package
+
+ashcan				ashcan
+
+xmas_stocking		xmas_stocking
+
+xmas_tree			xmas_tree
+
+________________________________
+FOOD (8 subclasses, 49 types)
+
+apple 				fruit
+banana				fruit
+melon				fruit
+grape				fruit
+lemon 				fruit
+orange				fruit
+peach				fruit
+strawberry			fruit
+raspberry			fruit
+date 				fruit
+olive				fruit
+chestnut			fruit
+
+carrot				vegetable
+radish				vegetable
+tomato				vegetable
+broccoli			vegetable
+mushroom			vegetable
+onion				vegetable
+lettuce				vegetable
+pumpkin				vegetable
+
+pop 				drink
+beer 				drink
+juice				drink
+water 				drink
+milk				drink
+
+beef 				protein
+chicken				protein
+pork				protein
+fish				protein
+egg					protein
+
+catsup				flavorer
+sauce 				flavorer
+parsley				flavorer
+tea_bag				flavorer
+sugar				flavorer
+vegetable_oil		flavorer
+
+cracker				baked_food
+bread				baked_food
+cookie				baked_food
+cake 				baked_food
+
+chip				snack
+hamburger			snack
+sandwich			snack
+candy				snack
+
+oatmeal				prepared_food
+sushi				prepared_food
+salad				prepared_food
+soup				prepared_food
+pasta				prepared_food
+
+________________________________
+TOOL (10 subclasses, 36 types)
+
+carving_knife		metal_tool
+hammer				metal_tool
+screwdriver			metal_tool
+scraper				metal_tool
+saw					metal_tool
+
+printer				electric_equipment
+scanner				electric_equipment
+facsimile			electric_equipment
+modem				electric_equipment
+
+calculator			electrical_device
+headset				electrical_device
+earphone			electrical_device
+mouse				electrical_device
+alarm				electrical_device
+
+toothbrush			toiletry
+perfume				toiletry
+makeup				toiletry
+
+highlighter			writing_tool
+marker				writing_tool
+pen 				writing_tool
+pencil 				writing_tool
+
+dishtowel			piece_of_cloth
+hand_towel			piece_of_cloth
+rag 				piece_of_cloth
+
+scrub_brush			cleaning_tool
+broom				cleaning_tool
+vacuum				cleaning_tool
+
+soap				cleansing
+shampoo				cleansing
+detergent			cleansing
+toothpaste			cleansing
+
+fork				cutlery
+spoon				cutlery
+knife 				cutlery
+
+lamp				illumination_tool
+candle				illumination_tool
+
+________________________________
+THING (7 subclasses, 27 types)
+
+necklace			decoration
+bracelet			decoration
+jewelery			decoration
+bow 				decoration
+wreath				decoration
+ribbon				decoration
+
+hardback			paper_product
+notebook			paper_product
+book 				paper_product
+newspaper			paper_product
+painting			paper_product
+pad 				paper_product
+document			paper_product
+
+gym_shoe			footwear
+sandal				footwear
+shoe 				footwear
+sock				footwear
+
+hat 				headwear
+sunglass			headwear
+
+shirt				clothing
+sweater				clothing
+underwear			clothing
+apparel				clothing
+
+tile 				building_materials
+plywood				building_materials
+
+cube				plaything
+ball 				plaything
+
+________________________________
+STATIC STATES FOR SUBCLASSES:
+has-ontop       ontop furniture tray xmas_tree
+has-inside      inside vessel tableware utensil bag basket box package ashcan bucket xmas_stocking
+openable        vessel bag box package      cabinet microwave oven dishwasher refrigerator
+cookable        FOOD
+freezable       FOOD
+dustyable       LOCATION RECEPTACLE THING
+stainable       LOCATION
+sliceable       fruit vegetable protein
+soakable        piece_of_cloth clothing
+toggleable      electric_equipment			microwave oven dishwasher refrigerator stove sink
+has-size        tableware tray box package ashcan
+has-color       furniture vessel bag basket box package
+
+rag-cleanable           LOCATION THING furniture bag bucket basket box package ashcan xmas_tree xmas_stocking
+dishtowel-cleanable     vessel tableware utensil tray
+hand_towel-cleanable    THING
+scrub_brush-cleanable   LOCATION furniture bag bucket basket box package ashcan xmas_tree xmas_stocking
+vacuum-cleanable        LOCATION
+broom-cleanable         LOCATION

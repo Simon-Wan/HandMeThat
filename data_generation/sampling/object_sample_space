@@ -1,0 +1,117 @@
+SAMPLE SPACE
+defining initial position and states for different types of objects
+
+________________________________
+POSITION (LOCATION OR RECEPTACLE)
+
+furniture			floor
+
+vessel				countertop table cabinet
+
+tableware			countertop table cabinet dishwasher refrigerator sink
+
+utensil				countertop table cabinet dishwasher refrigerator sink
+
+bag					floor countertop table sofa bed
+
+bucket				floor countertop table
+
+tray 				countertop table cabinet refrigerator
+
+basket				floor countertop table shelf cabinet sofa bed
+
+box					floor countertop table shelf cabinet sofa bed
+
+package				floor countertop table shelf cabinet sofa bed
+
+ashcan				floor
+
+xmas_tree			floor
+
+xmas_stocking		floor countertop table shelf cabinet sofa bed
+
+
+
+fruit 				table countertop refrigerator						utensil
+
+vegetable			table countertop refrigerator stove					utensil
+
+drink				table countertop refrigerator cabinet   			bag
+
+protein				table countertop refrigerator stove					utensil
+
+flavorer			table countertop refrigerator cabinet   			bag
+
+baked_food			table countertop refrigerator oven					tray
+
+snack				table countertop refrigerator microwave				tray
+
+prepared_food		table countertop refrigerator microwave				tray
+
+
+
+metal_tool			countertop table cabinet shelf						furniture
+
+electric_equipment	countertop table cabinet shelf                      furniture
+
+electrical_device	countertop table cabinet shelf						furniture
+
+toiletry			cabinet toilet bathtub sink pool 					bag
+
+writing_tool		countertop table cabinet shelf						bag
+
+piece_of_cloth		cabinet toilet bathtub sink pool					bucket
+
+cleaning_tool		cabinet toilet bathtub sink pool 					bucket
+
+cleansing			cabinet toilet bathtub sink pool 					bucket
+
+cutlery				countertop table cabinet dishwasher refrigerator	utensil
+
+illumination_tool	countertop table sofa bed shelf
+
+
+
+decoration			cabinet sofa bed 									package
+
+paper_product		cabinet sofa bed 									package
+
+footwear			cabinet floor
+
+headwear			cabinet sofa bed 									package
+
+clothing			cabinet sofa bed 									package
+
+building_materials	pool
+
+plaything			cabinet sofa bed 									package
+
+
+________________________________
+STATIC STATE
+
+open                NONE
+
+cooked				inside oven OR ontop stove OR inside microwave
+
+frozen				inside refrigerator
+
+sliced				NONE
+
+soaked				NONE
+
+toggled				refrigerator
+
+dusty				prob=1/3 if dustyable
+
+stained				prob=1/3 if stainable
+
+color-red			prob=1/3 if has-color
+
+color-green			prob=1/3 if has-color
+
+color-blue			prob=1/3 if has-color
+
+size-large			prob=1/2 if has-size
+
+size-small			prob=1/2 if has-size
