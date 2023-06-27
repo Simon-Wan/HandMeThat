@@ -98,7 +98,7 @@ def train(config, args):
         time_2 = datetime.datetime.now()
         print("Episode: {:3d} | time spent: {:s} | loss: {:2.3f}".format(episode_no, str(time_2 - time_1).rsplit(".")[0], running_avg_dagger_loss.get_avg()))
 
-        model_name = 'given_subgoal_weights_{}.pt'.format(episode_no - 10)
+        model_name = '{}_weights_{}.pt'.format(args.observability, episode_no - 10)
         agent.save_model_to_path(MODEL_DIR + '/' + model_name)
 
 

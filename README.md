@@ -54,17 +54,21 @@ This includes the required python packages from the third-party repositories.
 
 
 ### Prepare the HandMeThat Dataset
+
+We provide 2 versions of the HandMeThat dataset. Version 1 is the original dataset presented in HandMeThat paper. 
+Version 2 is a later version with more data pieces on fewer tasks. 
+Please refer to Dataset Generation section for more details.
+
 Download the version 1 (V1) dataset from [Google Drive link
 ](https://drive.google.com/file/d/1QoCL5veGnuJNhK1mMDryCrvpwVXTupdI/view?usp=sharing) and place the zipped file at `./datasets/v1`.
 
 
-Unzip the dataset so that `./data/HandMeThat_with_expert_demonstration` is a folder containing 10,000 json files.
-The data split information is presented in `./data/HandMeThat_data_info.json`.
+Unzip the dataset so that `./datasets/v1/HandMeThat_with_expert_demonstration` is a folder containing 10,000 json files.
 
-Download the version 2 (V2) dataset from [Google Drive link] and place the zipped file at `./datasets/v2`.
+Download the version 2 (V2) dataset from [Google Drive link](https://drive.google.com/drive/folders/108yFbEUPGDT7bxI_wRttqbAd1jlEynaT?usp=sharing) and place the files at `./datasets/v2`.
 
-Unzip the dataset so that `./data/HandMeThat_with_expert_demonstration` is a folder containing ***** json files.
-The data split information is presented in `./data/HandMeThat_data_info.json`.
+Unzip the dataset so that `./datasets/v2/HandMeThat_with_expert_demonstration` is a folder containing 116,146 json files.
+The data split information is presented in `./datasets/v2/HandMeThat_data_info.json`.
 
 ## Quickstart
 

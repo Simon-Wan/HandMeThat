@@ -53,9 +53,9 @@ def parse_args():
 
     # General Settings
     parser.add_argument('--output_dir', default='logs')
-    parser.add_argument('--data_path', default='./data')
+    parser.add_argument('--data_path', default='./datasets/v2')
     parser.add_argument('--data_dir_name', default='HandMeThat_with_expert_demonstration')
-    parser.add_argument('--save_path', default='./models')
+    parser.add_argument('--save_path', default='./checkpoints')
     parser.add_argument('--logging_off', default=0, type=int)
     parser.add_argument('--weight_file', default=None, type=str)
     parser.add_argument('--memory_file', default=None, type=str)

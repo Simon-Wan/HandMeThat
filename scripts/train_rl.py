@@ -22,7 +22,7 @@ from utils.vec_env import VecEnv
 from utils import logger
 from utils.memory import State, Transition
 
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
 torch.cuda.set_device(device)
 
 logging.getLogger().setLevel(logging.CRITICAL)

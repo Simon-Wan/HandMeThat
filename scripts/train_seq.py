@@ -4,7 +4,7 @@ import yaml
 import torch
 from baseline_models.Seq2Seq.seq2seq_trainer import train
 
-device = torch.device("cuda:5" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
 torch.cuda.set_device(device)
 
 

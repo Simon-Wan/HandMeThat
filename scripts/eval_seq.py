@@ -30,9 +30,9 @@ def load_config():
 
     # add for HandMeThat
     parser.add_argument('--output_dir', default='logs')
-    parser.add_argument('--data_path', default='./data')
+    parser.add_argument('--data_path', default='./datasets/v2')
     parser.add_argument('--data_dir_name', default='HandMeThat_with_expert_demonstration')
-    parser.add_argument('--save_path', default='./models')
+    parser.add_argument('--save_path', default='./checkpoints')
     parser.add_argument('--observability', default='fully', type=str)
     parser.add_argument('--load_pretrained', default=0, type=int)
     parser.add_argument('--load_from_tag', default=None, type=str)
@@ -128,7 +128,8 @@ def evaluate_for_seq2seq(args, agent, fully, level=None):
         json_str = json.load(f)
     eval_files = json_str[-1][args.eval_split]
     if level:
-        eval_files = [file for file in eval_files if level in file]
+        level_files = json_str[1][level]
+        eval_files = [file for file in eval_files if file in level_files]
     eval_files = np.random.permutation(eval_files)
     for filename in eval_files:
         path = os.path.join(data_path, data_dir_name, filename)
@@ -136,6 +137,7 @@ def evaluate_for_seq2seq(args, agent, fully, level=None):
         eval_env = HMTJerichoEnv(path, None, fully, step_limit=step_limit, get_valid=True)
 
         print(eval_env.json_path)
+        import ipdb; ipdb.set_trace()
 
         partial_obs, partial_info = partial_env.reset()
         obs, info = eval_env.reset()
