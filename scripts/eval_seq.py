@@ -29,6 +29,7 @@ def load_config():
                              " e.g. -p 'training.gamma=0.95'")
 
     # add for HandMeThat
+    parser.add_argument('--exp_name', default='level1')
     parser.add_argument('--output_dir', default='logs')
     parser.add_argument('--data_path', default='./datasets/v2')
     parser.add_argument('--data_dir_name', default='HandMeThat_with_expert_demonstration')
@@ -112,6 +113,8 @@ def main():
         'average_score': average_score,
         'success_rate': success_rate,
         'average_score_when_success': average_score_when_success,
+        'average_length_when_success': 100 - average_score_when_success,
+        'average_score_40': success_rate * average_score_when_success + (1 - success_rate) * (-40.0)
     }
     print('{}, {}, {}'.format(args.model, args.level, args.observability))
     for key in results.keys():
@@ -120,7 +123,7 @@ def main():
 
 def evaluate_for_seq2seq(args, agent, fully, level=None):
     eval_results = list()
-    step_limit = 8
+    step_limit = 6
     data_path = args.data_path
     data_dir_name = args.data_dir_name
     data_info = data_path + '/HandMeThat_data_info.json'
@@ -130,19 +133,19 @@ def evaluate_for_seq2seq(args, agent, fully, level=None):
     if level:
         level_files = json_str[1][level]
         eval_files = [file for file in eval_files if file in level_files]
-    eval_files = np.random.permutation(eval_files)
+    eval_files = np.random.permutation(eval_files)[:250]
     for filename in eval_files:
         path = os.path.join(data_path, data_dir_name, filename)
         partial_env = HMTJerichoEnv(path, None, False, step_limit=step_limit, get_valid=True)
         eval_env = HMTJerichoEnv(path, None, fully, step_limit=step_limit, get_valid=True)
 
         print(eval_env.json_path)
-        import ipdb; ipdb.set_trace()
 
         partial_obs, partial_info = partial_env.reset()
         obs, info = eval_env.reset()
         goal = eval_env.env.game._goal
-        subgoal = get_subgoal(goal, eval_env.env.game._objects_in_meaning)
+        subgoal = eval_env.env.game._subgoal
+        # subgoal = get_subgoal(goal, eval_env.env.game._objects_in_meaning)
 
         # simplify for training
         idx_start = obs.find('The human agent has')
@@ -181,6 +184,7 @@ def evaluate_for_seq2seq(args, agent, fully, level=None):
             # import ipdb; ipdb.set_trace()
             if not fully:
                 obs += eval_env.env.get_look(fully=False).replace('#', ' ')
+            obs = ' '.join(obs.split())
 
             partial_ob = partial_ob.replace('#', ' ')
             partial_ob = partial_ob.replace(',', '')
@@ -188,6 +192,7 @@ def evaluate_for_seq2seq(args, agent, fully, level=None):
             partial_obs += partial_ob
             # import ipdb; ipdb.set_trace()
             partial_obs += eval_env.env.get_look(fully=False).replace('#', ' ')
+            partial_obs = ' '.join(partial_obs.split())
 
             if done:
                 break

@@ -48,7 +48,7 @@ class RepeatAgent(BaseAgent):
                     continue
                 if self.object_dict[obj]['type'] in possible_types:
                     possible_objects.append(obj)
-            satisfied_objects = self.game.get_objects_in_utterance()
+            satisfied_objects = self.game._objects_in_utterance
             satisfied_objects = [pair[0] for pair in satisfied_objects]
 
             possible_objects = [obj for obj in possible_objects if obj in satisfied_objects]

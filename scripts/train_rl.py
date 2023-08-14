@@ -22,7 +22,7 @@ from utils.vec_env import VecEnv
 from utils import logger
 from utils.memory import State, Transition
 
-device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:6" if torch.cuda.is_available() else "cpu")
 torch.cuda.set_device(device)
 
 logging.getLogger().setLevel(logging.CRITICAL)
@@ -42,7 +42,7 @@ def configure_logger(args):
         ],
     )
 
-    logger.configure("{}/{}-{}-RS".format(log_dir, args.model, args.observability),   # todo: change your log name
+    logger.configure("{}/{}-{}-{}".format(log_dir, args.model, args.observability, args.exp_name),
                      format_strs=["log", "stdout"], off=args.logging_off)
     log = logger.log
 
@@ -74,7 +74,7 @@ def parse_args():
     parser.add_argument('--check_valid_actions_changed', default=0, type=int)
 
     # Training Settings
-    parser.add_argument('--env_step_limit', default=40, type=int)
+    parser.add_argument('--env_step_limit', default=8, type=int)        # todo
     parser.add_argument('--dynamic_episode_length', default=0, type=int)
     parser.add_argument('--episode_ext_type', default='steady_50', type=str)
     parser.add_argument('--num_envs', default=8, type=int)              # number of envs per step
@@ -214,6 +214,7 @@ def parse_args():
                         help='whether to replace sampling with argmax')
 
     # todo: HandMeThat arguments
+    parser.add_argument('--exp_name', default='v2')
     parser.add_argument('--observability', default='fully', type=str)   # fully or partially
 
     parser.add_argument('--seed', default=0, type=int)

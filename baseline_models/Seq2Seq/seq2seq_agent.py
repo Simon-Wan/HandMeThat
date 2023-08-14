@@ -19,7 +19,7 @@ class Seq2SeqAgent(BaseAgent):
         inv = info['inv']
         idx = inv.find('Recall your task:')
         task_description = inv[idx+17:]
-        # import ipdb; ipdb.set_trace()
+        task_description = ' '.join(task_description.split())
         actions, _ = agent_command_generation_greedy_generation(self.agent, [ob], [task_description], None)
         return actions[0]
 

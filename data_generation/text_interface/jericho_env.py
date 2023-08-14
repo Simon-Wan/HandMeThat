@@ -76,11 +76,11 @@ class HMTJerichoEnv:
             look = self.env.get_look(fully=self.fully)
             look = look.replace('#', ' ')
             look = look.replace(',', '')
-            info['look'] = look.lower()
+            info['look'] = look
             inv = self.env.get_inventory()
             inv = inv.replace('#', ' ')
             inv = inv.replace(',', '')
-            info['inv'] = inv.lower()
+            info['inv'] = inv
             if self.get_valid:
                 valid = self.env.get_valid_actions()
                 valid = [action.replace('#', ' ') for action in valid]

@@ -4,7 +4,7 @@ import yaml
 import torch
 from baseline_models.Seq2Seq.seq2seq_trainer import train
 
-device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:4" if torch.cuda.is_available() else "cpu")
 torch.cuda.set_device(device)
 
 
@@ -18,6 +18,7 @@ def load_config():
                              " e.g. -p 'training.gamma=0.95'")
 
     # add for HandMeThat
+    parser.add_argument('--exp_name', default='v2')
     parser.add_argument('--output_dir', default='logs')
     parser.add_argument('--data_path', default='./datasets/v2')
     parser.add_argument('--data_dir_name', default='HandMeThat_with_expert_demonstration')

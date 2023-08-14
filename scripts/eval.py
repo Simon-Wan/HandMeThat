@@ -39,8 +39,8 @@ def evaluate(agent, fully, num=None, level=None):
         json_str = json.load(f)
     validate = json_str[-1]['test']
     if level:
-        validate = [file for file in validate if level in file]
-    validate = np.random.permutation(validate)
+        validate = [file for file in validate if level[-1]+'.' in file]
+    validate = np.random.permutation(validate)[:250]
     if num:
         validate = validate[:num]
     for filename in validate:

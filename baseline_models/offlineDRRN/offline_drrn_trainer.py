@@ -56,6 +56,9 @@ class offlineDrrnTrainer(Trainer):
         Setup the environment.
         """
         obs, infos = envs.reset()
+        for idx, info in enumerate(infos):
+            infos[idx]['look'] = ' '.join(info['look'].split())
+            infos[idx]['inv'] = ' '.join(info['inv'].split())
         if self.use_action_model:
             states = self.agent.build_states(
                 obs, infos, ['reset'] * 8, [[]] * 8)
@@ -243,7 +246,7 @@ class offlineDrrnTrainer(Trainer):
         # Save model weights etc.
         MODEL_DIR = os.path.join(self.args.save_path, self.args.model, self.args.observability)
         if step % self.checkpoint_freq == 0:
-            self.agent.save(int(step / self.checkpoint_freq), MODEL_DIR)
+            self.agent.save(int(step / self.checkpoint_freq), MODEL_DIR, self.args.exp_name)
 
         if self.use_action_model:
             Ngram.end_step(self, step)
@@ -271,7 +274,7 @@ class offlineDrrnTrainer(Trainer):
 
     def eval(self, fully, level=None):
         eval_results = list()
-        step_limit = 40
+        step_limit = 8
         data_path = self.args.data_path
         data_dir_name = self.args.data_dir_name
         data_info = data_path + '/' + 'HandMeThat_data_info.json'

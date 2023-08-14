@@ -54,6 +54,9 @@ class DrrnTrainer(Trainer):
         Setup the environment.
         """
         obs, infos = envs.reset()
+        for idx, info in enumerate(infos):
+            infos[idx]['look'] = ' '.join(info['look'].split())
+            infos[idx]['inv'] = ' '.join(info['inv'].split())
         if self.use_action_model:
             states = self.agent.build_states(
                 obs, infos, ['reset'] * 8, [[]] * 8)
@@ -187,7 +190,6 @@ class DrrnTrainer(Trainer):
         for step in range(1, self.max_steps + 1):
             self.steps = step
             self.log("Step {}".format(step))
-            # import ipdb; ipdb.set_trace()
             action_ids, action_idxs, action_qvals = self.agent.act(states,
                                                                    valid_ids,
                                                                    [info['valid'] for info in infos],
@@ -232,7 +234,7 @@ class DrrnTrainer(Trainer):
         MODEL_DIR = os.path.join(self.args.save_path, self.args.model, self.args.observability)
 
         if step % self.checkpoint_freq == 0:
-            self.agent.save(int(step / self.checkpoint_freq), MODEL_DIR)
+            self.agent.save(int(step / self.checkpoint_freq), MODEL_DIR, self.args.exp_name)
 
         if self.use_action_model:
             Ngram.end_step(self, step)
@@ -260,7 +262,7 @@ class DrrnTrainer(Trainer):
 
     def eval(self, fully, level=None):
         eval_results = list()
-        step_limit = 40
+        step_limit = 8      # todo
         data_path = self.args.data_path
         data_dir_name = self.args.data_dir_name
         data_info = data_path + '/' + 'HandMeThat_data_info.json'

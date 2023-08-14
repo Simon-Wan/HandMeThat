@@ -241,10 +241,10 @@ class DrrnAgent:
             logging.error(traceback.format_exc())
             raise Exception("Didn't properly load model!")
 
-    def save(self, step: int, model_dir: str):
+    def save(self, step: int, model_dir: str, exp_name: str):
         try:
-            pickle.dump(self.memory, open(pjoin(model_dir, 'RS_memory_cont_cont_{}.pkl'.format(step)), 'wb'))
-            torch.save(self.network.state_dict(), pjoin(model_dir, 'RS_weights_cont_cont_{}.pt'.format(step)))
+            pickle.dump(self.memory, open(pjoin(model_dir, '{}_memory_{}.pkl'.format(exp_name, step)), 'wb'))
+            torch.save(self.network.state_dict(), pjoin(model_dir, '{}_weights_{}.pt'.format(exp_name, step)))
         except Exception as e:
             print("Error saving model.")
             logging.error(traceback.format_exc())

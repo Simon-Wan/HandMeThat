@@ -45,6 +45,7 @@ def train(config, args):
     with open(data_info, 'r') as f:
         json_str = json.load(f)
     train_files = json_str[-1]['train']
+    # train_files = [file for file in train_files if file[-6] == '1']
     train_files = np.random.permutation(train_files)    # random permutation for input
     for file in train_files:   # todo
         with open(args.data_path + '/' + args.data_dir_name + '/' + file, 'r') as f:
@@ -53,21 +54,23 @@ def train(config, args):
             full_observations = json_str['demo_observations_fully']
             partial_observations = json_str['demo_observations_partially']
             task = json_str['task_description']
+            task = ' '.join(task.split())
             if args.given_goal:
                 task += ' goal: ' + json_str['_goal']
             if args.given_subgoal:
-                task += ' subgoal: ' + get_subgoal(json_str['_goal'], json_str['_objects_in_meaning'])
+                task += ' subgoal: ' + json_str['_subgoal']
+                # task += ' subgoal: ' + get_subgoal(json_str['_goal'], json_str['_objects_in_meaning'])
             trajectory = []
             for i in range(len(actions)):
                 full_obs = full_observations[i]
                 full_obs_list = full_obs.split()
-                if len(full_obs_list) > 1000:
-                    full_obs_list = full_obs_list[:500] + full_obs_list[-500:]     # avoid too long obs
+                # if len(full_obs_list) > 1000:
+                #     full_obs_list = full_obs_list[:500] + full_obs_list[-500:]     # avoid too long obs
                 full_obs = ' '.join(full_obs_list)
                 partial_obs = partial_observations[i]
                 partial_obs_list = partial_obs.split()
-                if len(partial_obs_list) > 1000:
-                    partial_obs_list = partial_obs_list[:500] + partial_obs_list[-500:]  # avoid too long obs
+                # if len(partial_obs_list) > 1000:
+                #     partial_obs_list = partial_obs_list[:500] + partial_obs_list[-500:]  # avoid too long obs
                 partial_obs = ' '.join(partial_obs_list)
 
                 if fully:
@@ -98,7 +101,7 @@ def train(config, args):
         time_2 = datetime.datetime.now()
         print("Episode: {:3d} | time spent: {:s} | loss: {:2.3f}".format(episode_no, str(time_2 - time_1).rsplit(".")[0], running_avg_dagger_loss.get_avg()))
 
-        model_name = '{}_weights_{}.pt'.format(args.observability, episode_no - 10)
+        model_name = '{}_{}_weights_{}.pt'.format(args.exp_name, args.observability, episode_no - 10)
         agent.save_model_to_path(MODEL_DIR + '/' + model_name)
 
 
